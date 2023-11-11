@@ -4,11 +4,23 @@ import "./addSong.css"
 function AddSong() {
 
     return(
-        <div className="container">
-            <h1>Add a New Song</h1>
-            <div className="song-inputs">
-                <input></input>
-                <input></input>
+        <div>
+            <div className="container">
+                <h1>Add a New Song</h1>
+                <div className="song-inputs">
+                    <label>Song Name:</label>
+                    <input
+                        type="text"
+                        placeholder="Enter Song Name"
+                        onChange={()=>{}}
+                    />
+                    <label>Song Artist:</label>
+                    <input
+                        type="text"
+                        placeholder="Enter Song Name"
+                        onChange={()=>{}}
+                    />
+                </div>
             </div>
             <Sliders />
         </div>
