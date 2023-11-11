@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormControl, InputLabel, Slider, Box, Button, Typography } from '@mui/material';
 
-function Sliders () {
+function Sliders ({buttonName}) {
     const [happyValue, setHappyValue] = useState(50);
     const [sadValue, setSadValue] = useState(50);
     const [energyValue, setEnergyValue] = useState(50);
@@ -83,7 +83,7 @@ function Sliders () {
         />
         <Box className="buttonContainer">
           <Button variant="contained" onClick={handleSubmit}>
-            Let's Vibe
+            {buttonName}
           </Button>
         </Box>
       </Box>

@@ -22,7 +22,7 @@ function AddSong() {
                     />
                 </div>
             </div>
-            <Sliders />
+            <Sliders buttonName="SUBMIT SONG"/>
         </div>
     );
 }

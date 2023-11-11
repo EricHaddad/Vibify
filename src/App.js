@@ -14,12 +14,12 @@ function App() {
           Vibify
         </p>
       </header>
+      <Link className='link' to="/addSong">Add a Song</Link>
       <p className="h2">
           What's your vibe?
         </p>
-      <Link to="/addSong">New Page</Link>
-      <Sliders />
-
+      <Sliders buttonName="LET'S VIBE"/>
+      
     </div>
   );
 }
