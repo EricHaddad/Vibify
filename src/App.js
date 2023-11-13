@@ -6,6 +6,11 @@ import Sliders from './components/sliders';
 
 function App() {
   
+  const handleSubmit = (happyValue, sadValue, energyValue, calmnessValue, danceabilityValue) => {
+    const message = `Happy Value: ${happyValue}, Sad Value: ${sadValue}, Energetic Value: ${energyValue}, Calmness Value: ${calmnessValue}, Danceability Value: ${danceabilityValue}`;
+    alert(message);
+  };
+
   return (
     <div className="App">
       
@@ -18,7 +23,7 @@ function App() {
       <p className="h2">
           What's your vibe?
         </p>
-      <Sliders buttonName="LET'S VIBE"/>
+      <Sliders buttonName="LET'S VIBE" handleSubmit={handleSubmit}/>
       
     </div>
   );

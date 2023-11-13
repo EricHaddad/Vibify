@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormControl, InputLabel, Slider, Box, Button, Typography } from '@mui/material';
 
-function Sliders ({buttonName}) {
+function Sliders ({buttonName, handleSubmit}) {
     const [happyValue, setHappyValue] = useState(50);
     const [sadValue, setSadValue] = useState(50);
     const [energyValue, setEnergyValue] = useState(50);
@@ -28,10 +28,9 @@ function Sliders ({buttonName}) {
         setDanceabilityValue(newValue);
       };  
     
-      const handleSubmit = () => {
-        const message = `Happy Value: ${happyValue}, Sad Value: ${sadValue}, Energetic Value: ${energyValue}, Calmness Value: ${calmnessValue}, Danceability Value: ${danceabilityValue}`;
-        alert(message);
-      };
+    const submitForm = () =>{
+        handleSubmit(happyValue, sadValue, energyValue, calmnessValue, danceabilityValue)
+    }
 
     return(
         <Box
@@ -82,7 +81,7 @@ function Sliders ({buttonName}) {
           className="sliderStyle"
         />
         <Box className="buttonContainer">
-          <Button variant="contained" onClick={handleSubmit}>
+          <Button variant="contained" onClick={submitForm}>
             {buttonName}
           </Button>
         </Box>
