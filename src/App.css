@@ -31,24 +31,4 @@
   margin-top: 20px;
 }
 
-.slider-label {
-  transition: color 0.3s; /* Add a transition for the "color" property */
-}
 
-.animated-label {
-  animation: labelColorChange 0.3s;
-}
-
-@keyframes labelColorChange {
-  from {
-    color: white; /* Initial color (white) */
-  }
-  to {
-    color: orange; /* Target color (orange) */
-  }
-}
-
-.link {
-  color: white;
-  font-weight: bold;
-}
