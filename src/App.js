@@ -8,11 +8,17 @@ function App() {
   const handleSubmit = (happyValue, sadValue, energyValue, calmnessValue, danceabilityValue) => {
     const message = `Happy Value: ${happyValue}, Sad Value: ${sadValue}, Energetic Value: ${energyValue}, Calmness Value: ${calmnessValue}, Danceability Value: ${danceabilityValue}`;
     alert(message);
+    var csv = require('jquery-csv');
+    var data = csv.toArray("Vibify_Database.csv");
+    alert(data);
   };
 
   return (
+    
     <div className="App">
-      
+      <head>
+        <script src="jquery-csv.js"></script>
+      </head>
       <header className="App-header">
         <p>
           Vibify
