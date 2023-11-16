@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { FormControl, InputLabel, Slider, Box, Button, Typography } from '@mui/material';
 
-function Sliders ({buttonName, handleSubmit}) {
+function Sliders ({buttonName, handleSubmit, height}) {
     const [happyValue, setHappyValue] = useState(50);
     const [sadValue, setSadValue] = useState(50);
     const [energyValue, setEnergyValue] = useState(50);
     const [calmnessValue, setCalmnessValue] = useState(50);
     const [danceabilityValue, setDanceabilityValue] = useState(50);
+
+    const boxHeight = height + "vh";
 
     const handleHappyValue = (event, newValue) => {
         setHappyValue(newValue);
@@ -37,7 +39,7 @@ function Sliders ({buttonName, handleSubmit}) {
       display="flex"
       flexDirection="column" 
       alignItems="center"
-      height="100vh"
+      height= {boxHeight}
       >
         <Typography marginBottom="8px" color="white" variant="h6">Happy</Typography>
         <Slider

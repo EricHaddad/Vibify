@@ -8,12 +8,10 @@ const [songName, setSongName] = useState("");
 
     const handleSongNameChange = (e) => {
         setSongName(e.target.value);
-        console.log(e.target.value);
     };
 
     const handleArtistNameChange = (e) => {
         setArtistName(e.target.value);
-        console.log(e.target.value);
     };
 
     const handleSubmit = (happyValue, sadValue, energyValue, calmnessValue, danceabilityValue) => {
@@ -42,7 +40,7 @@ const [songName, setSongName] = useState("");
                     />
                 </div>
             </div>
-            <Sliders buttonName="SUBMIT SONG" handleSubmit={handleSubmit}/>
+            <Sliders buttonName="SUBMIT SONG" handleSubmit={handleSubmit} height="69.74"/>
         </div>
     );
 }

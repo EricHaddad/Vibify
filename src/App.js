@@ -1,6 +1,5 @@
 import './App.css';
 import React, { useState } from 'react';
-import { FormControl, InputLabel, Slider, Box, Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Sliders from './components/sliders';
 
@@ -23,7 +22,7 @@ function App() {
       <p className="h2">
           What's your vibe?
         </p>
-      <Sliders buttonName="LET'S VIBE" handleSubmit={handleSubmit}/>
+      <Sliders buttonName="LET'S VIBE" handleSubmit={handleSubmit} height="70.69"/>
       
     </div>
   );
