@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom'; // Import useHistory
+import { Link, useHistory } from 'react-router-dom';
 import Sliders from './components/sliders';
 import { searchSpotify } from './path/to/spotifyApi'; // Adjust the path accordingly
 
