@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from "react";
 import Sliders from "./components/sliders";
 import "./addSong.css"

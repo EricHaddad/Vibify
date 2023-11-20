@@ -1,24 +1,40 @@
+// App.js
 import './App.css';
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom'; // Change here
 import Sliders from './components/sliders';
-import { searchSpotify } from './path/to/spotifyApi'; // Adjust the path accordingly
+import { searchSpotify, getSpotifyAccessToken } from './spotifyAPI'; // Adjust the path accordingly
 
-function App() {
-  const history = useHistory();
-  const [song, setSong] = useState(null);
+const App = ({ setSong }) => {
+  const navigate = useNavigate(); // Change here
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch Spotify access token
+        const accessToken = await getSpotifyAccessToken();
+        console.log('Access Token:', accessToken);
+
+        // Perform any other initialization logic with the token if needed
+      } catch (error) {
+        console.error('Error getting access token:', error);
+      }
+    };
+
+    fetchData();
+  }, []); // Make sure to include dependencies if needed
 
   const handleSubmit = async (happyValue, sadValue, energyValue, calmnessValue, danceabilityValue) => {
     try {
       // Perform your logic to get song details based on sliders' values
-      const query = 'Your search query here';
+      const query = 'Anonymous Cory Wong';
       const songDetails = await searchSpotify(query);
 
       // Update state with song details
       setSong(songDetails);
 
       // Navigate to the new page
-      history.push('/songDetails');
+      navigate('/songDetails'); // Change here
     } catch (error) {
       console.error('Error fetching song:', error);
     }
