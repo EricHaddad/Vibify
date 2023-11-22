@@ -14,9 +14,27 @@ const [songName, setSongName] = useState("");
         setArtistName(e.target.value);
     };
 
-    const handleSubmit = (happyValue, sadValue, energyValue, calmnessValue, danceabilityValue) => {
+    const handleSubmit = async (happyValue, sadValue, energyValue, calmnessValue, danceabilityValue) => {
         const newLine = `${songName},${artistName},${happyValue},${sadValue},${energyValue},${calmnessValue},${danceabilityValue}`
         alert(newLine)
+        try {
+            const response = await fetch('http://localhost:4000/write-file/Vibify_Database.csv', {
+                method: 'POST',
+                body: JSON.stringify(newLine),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error! status: ${response.status}`);
+            }
+            
+            const result = await response.json();
+            console.log(result);
+        } catch (err) {
+           console.log(err.message);
+        }
     }
 
     return(
