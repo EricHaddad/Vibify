@@ -16,27 +16,24 @@ const SongDetails = ({ song, accessToken }) => {
 
   const handleLike = () => {
     setLiked(!liked);
-    setDisliked(false); // Ensure only one is selected
+    setDisliked(false);
     setIsHoveredLike(false);
     setIsHoveredDislike(false);
-    // Add your logic to handle the like action
   };
 
   const handleDislike = () => {
     setDisliked(!disliked);
-    setLiked(false); // Ensure only one is selected
+    setLiked(false);
     setIsHoveredLike(false);
     setIsHoveredDislike(false);
-    // Add your logic to handle the dislike action
   };
 
-  // Check if the song has album images
   const hasAlbumImages = song.album && song.album.images && song.album.images.length > 0;
 
   return (
     <div
       style={{
-        height: '100vh', // Set the container height to 100% of the viewport height
+        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
