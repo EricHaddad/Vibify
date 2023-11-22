@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'; // Change here
 import Sliders from './components/sliders';
 import { searchSpotify, getSpotifyAccessToken } from './spotifyAPI'; // Adjust the path accordingly
 
+
 const App = ({ setSong }) => {
   const navigate = useNavigate(); // Change here
 
@@ -25,6 +26,7 @@ const App = ({ setSong }) => {
   }, []); // Make sure to include dependencies if needed
 
   const handleSubmit = async (happyValue, sadValue, energyValue, calmnessValue, danceabilityValue) => {
+    const message = `Happy Value: ${happyValue}, Sad Value: ${sadValue}, Energetic Value: ${energyValue}, Calmness Value: ${calmnessValue}, Danceability Value: ${danceabilityValue}`;
     try {
       // Perform your logic to get song details based on sliders' values
       const query = 'Anonymous Cory Wong';
