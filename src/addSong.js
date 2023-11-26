@@ -16,7 +16,7 @@ const [songName, setSongName] = useState("");
     };
 
     const handleSubmit = async (happyValue, sadValue, energyValue, calmnessValue, danceabilityValue) => {
-        const newLine = `${songName},${artistName},[${happyValue}],[${sadValue}],[${energyValue}],[${calmnessValue}],[${danceabilityValue}]\n`
+        const newLine = `${songName} - ${artistName},"[${happyValue}]","[${sadValue}]","[${energyValue}]","[${calmnessValue}]","[${danceabilityValue}]"\n`
         alert(newLine)
         try {
             const response = await fetch('http://localhost:4000/write-file/Vibify_Database.csv', {
