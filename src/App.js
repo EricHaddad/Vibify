@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // Change here
 import Sliders from './components/sliders';
 import { searchSpotify, getSpotifyAccessToken } from './spotifyAPI'; // Adjust the path accordingly
+import "bootstrap/dist/css/bootstrap.min.css"
+import Login from "./login"
 
 
 const App = ({ setSong }) => {
@@ -50,6 +52,7 @@ const App = ({ setSong }) => {
       <Link className='link' to="/addSong">Add a Song</Link>
       <p className="h2">What's your vibe?</p>
       <Sliders buttonName="LET'S VIBE" handleSubmit={handleSubmit} height="70.69"/>
+      <Login />
     </div>
   );
 }
