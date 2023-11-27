@@ -9,13 +9,13 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Login from "./login"
 
 
-const App = ({ setSong }) => {
+const App = ({ setSong, setMood }) => {
   const navigate = useNavigate(); // Change here
 
   // Making a GET request
   const readCSV = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:4000/read-file/Vibify_Database.csv');
+      const response = await axios.get('http://localhost:4000/read-file/Vibify_Database.csv');
       return response.data;
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -27,7 +27,6 @@ const App = ({ setSong }) => {
       try {
         // Fetch Spotify access token
         const accessToken = await getSpotifyAccessToken();
-        console.log('Access Token:', accessToken);
         // Perform any other initialization logic with the token if needed
       } catch (error) {
         console.error('Error getting access token:', error);
@@ -99,14 +98,16 @@ const App = ({ setSong }) => {
   }
 
   const handleSubmit = async (happyValue, sadValue, energyValue, calmnessValue, danceabilityValue) => {
-    const message = `Happy Value: ${happyValue}, Sad Value: ${sadValue}, Energetic Value: ${energyValue}, Calmness Value: ${calmnessValue}, Danceability Value: ${danceabilityValue}`;
     try {
       var data = await readCSV();
       var result = await calculateResult( happyValue, sadValue, energyValue, calmnessValue, danceabilityValue, data);      
       // Perform your logic to get song details based on sliders' values
       const songDetails = await searchSpotify(result[0]);
+      const message = `${result[0]},"[${happyValue}]","[${sadValue}]","[${energyValue}]","[${calmnessValue}]","[${danceabilityValue}]"\n`;
+      
       // Update state with song details
       setSong(songDetails);
+      setMood(message);
       // Navigate to the new page
       navigate('/songDetails'); // Change here
     } catch (error) {
