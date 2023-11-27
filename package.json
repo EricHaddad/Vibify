@@ -23,6 +23,7 @@
     "react-spotify-web-playback-sdk": "^3.0.2",
     "web-vitals": "^2.1.4"
   },
+  "proxy": "http://127.0.0.1:5000",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
