@@ -5,6 +5,9 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom'; // Change here
 import Sliders from './components/sliders';
 import { searchSpotify, getSpotifyAccessToken } from './spotifyAPI'; // Adjust the path accordingly
+import "bootstrap/dist/css/bootstrap.min.css"
+import Login from "./login"
+
 
 const App = ({ setSong }) => {
   const navigate = useNavigate(); // Change here
@@ -96,6 +99,7 @@ const App = ({ setSong }) => {
   }
 
   const handleSubmit = async (happyValue, sadValue, energyValue, calmnessValue, danceabilityValue) => {
+    const message = `Happy Value: ${happyValue}, Sad Value: ${sadValue}, Energetic Value: ${energyValue}, Calmness Value: ${calmnessValue}, Danceability Value: ${danceabilityValue}`;
     try {
       var data = await readCSV();
       var result = await calculateResult( happyValue, sadValue, energyValue, calmnessValue, danceabilityValue, data);      
@@ -118,6 +122,7 @@ const App = ({ setSong }) => {
       <Link className='link' to="/addSong">Add a Song</Link>
       <p className="h2">What's your vibe?</p>
       <Sliders buttonName="LET'S VIBE" handleSubmit={handleSubmit} height="70.69"/>
+      <Login />
     </div>
   );
 }
