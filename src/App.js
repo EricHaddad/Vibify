@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Login from "./login"
 
 
-const App = ({ setSong }) => {
+const App = ({ setSong, setMood }) => {
   const navigate = useNavigate(); // Change here
 
   useEffect(() => {
@@ -28,15 +28,14 @@ const App = ({ setSong }) => {
   }, []); // Make sure to include dependencies if needed
 
   const handleSubmit = async (happyValue, sadValue, energyValue, calmnessValue, danceabilityValue) => {
-    const message = `Happy Value: ${happyValue}, Sad Value: ${sadValue}, Energetic Value: ${energyValue}, Calmness Value: ${calmnessValue}, Danceability Value: ${danceabilityValue}`;
     try {
       // Perform your logic to get song details based on sliders' values
       const query = 'Anonymous Cory Wong';
       const songDetails = await searchSpotify(query);
-
+      const message = `${query},"[${happyValue}]","[${sadValue}]","[${energyValue}]","[${calmnessValue}]","[${danceabilityValue}]"\n`;
       // Update state with song details
       setSong(songDetails);
-
+      setMood(message);
       // Navigate to the new page
       navigate('/songDetails'); // Change here
     } catch (error) {

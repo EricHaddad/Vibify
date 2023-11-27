@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp as faThumbsUpOutline, faThumbsDown as faThumbsDownOutline } from '@fortawesome/free-regular-svg-icons';
 
-const SongDetails = ({ song, accessToken }) => {
+const SongDetails = ({ song, accessToken, mood }) => {
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
   const [isHoveredLike, setIsHoveredLike] = useState(false);
@@ -14,11 +14,29 @@ const SongDetails = ({ song, accessToken }) => {
     return <p>Loading...</p>;
   }
 
-  const handleLike = () => {
+  const handleLike = async () => {
     setLiked(!liked);
     setDisliked(false);
     setIsHoveredLike(false);
     setIsHoveredDislike(false);
+    try {
+      const response = await fetch('http://localhost:4000/edit-file/Vibify_Database.csv', {
+          method: 'POST',
+          body: mood,
+          headers: {
+              'Content-Type': 'text/plain',
+          },
+      });
+
+      if (!response.ok) {
+          throw new Error(`Error! status: ${response.status}`);
+      }
+      
+      const result = await response.json();
+      console.log(result);
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   const handleDislike = () => {

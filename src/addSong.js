@@ -4,7 +4,7 @@ import Sliders from "./components/sliders";
 import "./addSong.css"
 
 function AddSong() {
-const [songName, setSongName] = useState("");
+    const [songName, setSongName] = useState("");
     const [artistName, setArtistName] = useState("");
 
     const handleSongNameChange = (e) => {
