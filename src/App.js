@@ -96,24 +96,18 @@ const App = ({ setSong }) => {
   }
 
   const handleSubmit = async (happyValue, sadValue, energyValue, calmnessValue, danceabilityValue) => {
-    var data = await readCSV();
-    var result = await calculateResult( happyValue, sadValue, energyValue, calmnessValue, danceabilityValue, data);
-    alert("Closest Song is " + result[0] + " with a score of " + result[1]);
-    /*
     try {
-
+      var data = await readCSV();
+      var result = await calculateResult( happyValue, sadValue, energyValue, calmnessValue, danceabilityValue, data);      
       // Perform your logic to get song details based on sliders' values
-      const query = 'Anonymous Cory Wong';
-      const songDetails = await searchSpotify(query);
-
+      const songDetails = await searchSpotify(result[0]);
       // Update state with song details
       setSong(songDetails);
-
       // Navigate to the new page
       navigate('/songDetails'); // Change here
     } catch (error) {
       console.error('Error fetching song:', error);
-    }*/
+    }
   };
 
   return (
