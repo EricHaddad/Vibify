@@ -31,7 +31,7 @@ export const getSpotifyAccessToken = async () => {
 
     const data = await response.json();
     const accessToken = data.access_token;
-
+    console.log(`SPOTIFY API ACCESSTOKEN: ${accessToken}`)
     return accessToken;
   } catch (error) {
     console.error('Error obtaining Spotify access token:', error);

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SpotifyPlayerComponent from './spotifyPlayer';
+import SpotifyPlayer from 'react-spotify-web-playback';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp as faThumbsUpOutline, faThumbsDown as faThumbsDownOutline } from '@fortawesome/free-regular-svg-icons';
@@ -44,6 +45,7 @@ const SongDetails = ({ song, accessToken, mood }) => {
     setLiked(false);
     setIsHoveredLike(false);
     setIsHoveredDislike(false);
+    console.log(`accessToken: ${accessToken}`)
   };
 
   const hasAlbumImages = song.album && song.album.images && song.album.images.length > 0;
@@ -69,8 +71,19 @@ const SongDetails = ({ song, accessToken, mood }) => {
       )}
       <h1 style={{ margin: '5px 0 1px', color: 'white' }}>{song.name}</h1>
       <h3 style={{ margin: '5px 0', color: 'white' }}>{song.artists[0].name}</h3>
-      <SpotifyPlayerComponent accessToken={accessToken} trackUri={song.uri} />
-
+      <div style={{width: "50vw", height: "100px", backgroundColor:"transparent"}}>
+        <SpotifyPlayer
+          token={accessToken}
+          uris={[song.uri]} // Pass the song URI as an array to uris
+          autoPlay={true} // Adjust settings as needed
+          styles={{
+            // Customize player styles if required
+            bgColor: 'purple',
+            color: 'white',
+            sliderColor: 'green',
+          }}
+        />
+      </div>
       {/* Like and Dislike Buttons */}
       <div style={{ marginTop: '5px', display: 'flex', justifyContent: 'center' }}>
         <button

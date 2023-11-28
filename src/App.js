@@ -1,6 +1,6 @@
 // App.js
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom'; // Change here
 import Sliders from './components/sliders';
@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Login from "./login"
 
 
-const App = ({ setSong, setMood }) => {
+const App = ({ setSong, setMood, setToken }) => {
   const navigate = useNavigate(); // Change here
 
   // Making a GET request
@@ -26,7 +26,10 @@ const App = ({ setSong, setMood }) => {
     const fetchData = async () => {
       try {
         // Fetch Spotify access token
-        const accessToken = await getSpotifyAccessToken();
+        const urlParams = new URLSearchParams(window.location.search);
+        const accessToken = urlParams.get('accessToken');
+        console.log(`params access Token: ${accessToken}`);
+        setToken(accessToken)
         // Perform any other initialization logic with the token if needed
       } catch (error) {
         console.error('Error getting access token:', error);
@@ -68,7 +71,7 @@ const App = ({ setSong, setMood }) => {
 
     denominator = (Math.sqrt(vec1Magnitude) * Math.sqrt(vec2Magnitude));
 
-    if (denominator == 0) {
+    if (denominator === 0) {
       return 0
     } 
 
@@ -104,7 +107,7 @@ const App = ({ setSong, setMood }) => {
       // Perform your logic to get song details based on sliders' values
       const songDetails = await searchSpotify(result[0]);
       const message = `${result[0]},"[${happyValue}]","[${sadValue}]","[${energyValue}]","[${calmnessValue}]","[${danceabilityValue}]"\n`;
-      
+
       // Update state with song details
       setSong(songDetails);
       setMood(message);
