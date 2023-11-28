@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SpotifyPlayerComponent from './spotifyPlayer';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import SpotifyPlayer from 'react-spotify-web-playback';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
@@ -86,6 +86,11 @@ const SongDetails = ({ song, accessToken, mood }) => {
       </div>
       {/* Like and Dislike Buttons */}
       <div style={{ marginTop: '5px', display: 'flex', justifyContent: 'center' }}>
+        {/* Link to the main page */}
+        <Link to="/" style={{ position: 'absolute', top: '10px', left: '10px', fontSize: '18px', color: 'white' }}>
+          Back to Main Page
+        </Link>
+
         <button
           onClick={handleLike}
           onMouseEnter={() => setIsHoveredLike(true)}
@@ -104,6 +109,7 @@ const SongDetails = ({ song, accessToken, mood }) => {
             style={{ color: liked ? "#ffffff" : isHoveredLike ? "#ffffff" : "#808080" }}
           />
         </button>
+        
         <button
           onClick={handleDislike}
           onMouseEnter={() => setIsHoveredDislike(true)}

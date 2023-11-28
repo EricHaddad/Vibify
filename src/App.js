@@ -8,7 +8,6 @@ import { searchSpotify, getSpotifyAccessToken } from './spotifyAPI'; // Adjust t
 import "bootstrap/dist/css/bootstrap.min.css"
 import Login from "./login"
 
-
 const App = ({ setSong, setMood, setToken }) => {
   const navigate = useNavigate(); // Change here
 
@@ -121,9 +120,14 @@ const App = ({ setSong, setMood, setToken }) => {
   return (
     <div className="App">
       <header className="App-header">
-        <p>Vibify</p>
+        <p style={{ marginTop:'20px'}}>Vibify</p>
       </header>
-      <Link className='link' to="/addSong">Add a Song</Link>
+      <Link to="/addSong" className="btn btn-success addButton">
+        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
+          <path fill="#ffffff" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
+        </svg>
+        Add Song
+      </Link>
       <p className="h2">What's your vibe?</p>
       <Sliders buttonName="LET'S VIBE" handleSubmit={handleSubmit} height="70.69"/>
       <Login />
