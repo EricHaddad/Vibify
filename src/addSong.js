@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import Sliders from "./components/sliders";
 import "./addSong.css"
@@ -60,6 +61,18 @@ function AddSong() {
                 </div>
             </div>
             <Sliders buttonName="SUBMIT SONG" handleSubmit={handleSubmit} height="69.74"/>
+            <Link
+                to="/"
+                style={{
+                position: "absolute",
+                top: "10px",
+                left: "10px",
+                fontSize: "18px",
+                color: "white",
+                }}
+            >
+                Back to Main Page
+            </Link>
         </div>
     );
 }
