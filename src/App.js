@@ -8,7 +8,7 @@ import { searchSpotify, getSpotifyAccessToken } from './spotifyAPI'; // Adjust t
 import "bootstrap/dist/css/bootstrap.min.css"
 import Login from "./login"
 
-const App = ({ setSong, setMood, setToken }) => {
+const App = ({ setSong, setMood, setToken, setSongList }) => {
   const navigate = useNavigate(); // Change here
 
   // Making a GET request
@@ -28,7 +28,9 @@ const App = ({ setSong, setMood, setToken }) => {
         const urlParams = new URLSearchParams(window.location.search);
         const accessToken = urlParams.get('accessToken');
         console.log(`params access Token: ${accessToken}`);
-        setToken(accessToken)
+        if(accessToken !== null){
+          setToken(accessToken)
+        }
         // Perform any other initialization logic with the token if needed
       } catch (error) {
         console.error('Error getting access token:', error);
@@ -83,6 +85,7 @@ const App = ({ setSong, setMood, setToken }) => {
     var highSong = "";
     var highScore = 0;
     data = data.split("\n");
+    let scores = {}
 
     var userArray = [happyValue, sadValue, energyValue, calmnessValue, danceabilityValue];
     for (let i = 0; i < data.length; i++) {
@@ -90,25 +93,35 @@ const App = ({ setSong, setMood, setToken }) => {
       currentSong = data[i][0];
       var currentSongArray = [average(data[i][1]), average(data[i][2]), average(data[i][3]), average(data[i][4]), average(data[i][5])];
       currentScore = cs(userArray, currentSongArray);
+      scores[currentSong] = currentScore;
       if (currentScore > highScore) {
         highScore = currentScore;
         highSong = currentSong;
       }
 
     }
-    return [highSong, highScore];
+    // Convert object to an array of key-value pairs
+    const entries = Object.entries(scores);
+
+    // Sort the array based on numeric values (descending order)
+    entries.sort((a, b) => b[1] - a[1]);
+
+    // Reconstruct an object from the sorted array
+    const sortedScores = Object.fromEntries(entries);
+    return sortedScores;
   }
 
   const handleSubmit = async (happyValue, sadValue, energyValue, calmnessValue, danceabilityValue) => {
     try {
       var data = await readCSV();
-      var result = await calculateResult( happyValue, sadValue, energyValue, calmnessValue, danceabilityValue, data);      
+      var result = await calculateResult( happyValue, sadValue, energyValue, calmnessValue, danceabilityValue, data);   
       // Perform your logic to get song details based on sliders' values
-      const songDetails = await searchSpotify(result[0]);
-      const message = `${result[0]},"[${happyValue}]","[${sadValue}]","[${energyValue}]","[${calmnessValue}]","[${danceabilityValue}]"\n`;
+      const songDetails = await searchSpotify(Object.keys(result)[0]);
+      const message = `${Object.keys(result)[0]},"[${happyValue}]","[${sadValue}]","[${energyValue}]","[${calmnessValue}]","[${danceabilityValue}]"\n`;
 
       // Update state with song details
       setSong(songDetails);
+      setSongList(result);
       setMood(message);
       // Navigate to the new page
       navigate('/songDetails'); // Change here

@@ -1,18 +1,32 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import SpotifyPlayer from 'react-spotify-web-playback';
+import { searchSpotify } from './spotifyAPI';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { faThumbsUp as faThumbsUpOutline, faThumbsDown as faThumbsDownOutline } from '@fortawesome/free-regular-svg-icons';
 
-const SongDetails = ({ song, accessToken, mood }) => {
+const SongDetails = ({ song, accessToken, mood, songList, setSong }) => {
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
   const [isHoveredLike, setIsHoveredLike] = useState(false);
   const [isHoveredDislike, setIsHoveredDislike] = useState(false);
+  const [currSongNum, setSongNum] = useState(0);
+
+
 
   if (!song) {
     return <p>Loading...</p>;
+  }
+
+  const loadNextSong = async () =>{
+    let nextSong = await searchSpotify(Object.keys(songList)[1 + currSongNum]);
+    setSong(nextSong);
+    setSongNum(1 + currSongNum);
+    setDisliked(false);
+    setLiked(false);
+    setIsHoveredLike(false);
+    setIsHoveredDislike(false);
   }
 
   const handleLike = async () => {
@@ -38,6 +52,7 @@ const SongDetails = ({ song, accessToken, mood }) => {
     } catch (err) {
       console.log(err.message);
     }
+    loadNextSong();
   };
 
   const handleDislike = () => {
@@ -46,6 +61,7 @@ const SongDetails = ({ song, accessToken, mood }) => {
     setIsHoveredLike(false);
     setIsHoveredDislike(false);
     console.log(`accessToken: ${accessToken}`)
+    loadNextSong();
   };
 
   const hasAlbumImages = song.album && song.album.images && song.album.images.length > 0;
