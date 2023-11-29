@@ -20,6 +20,13 @@ const SongDetails = ({ song, accessToken, mood, songList, setSong }) => {
   }
 
   const loadNextSong = async () =>{
+    console.log(currSongNum)
+    console.log(Object.keys(songList).length - 1)
+    console.log(currSongNum === Object.keys(songList).length - 2)
+    if(currSongNum === Object.keys(songList).length - 2){
+      alert("There are no more songs matching your vibe")
+      return;
+    }
     let nextSong = await searchSpotify(Object.keys(songList)[1 + currSongNum]);
     setSong(nextSong);
     setSongNum(1 + currSongNum);

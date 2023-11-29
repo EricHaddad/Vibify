@@ -18,7 +18,7 @@ function AddSong() {
 
     const handleSubmit = async (happyValue, sadValue, energyValue, calmnessValue, danceabilityValue) => {
         const newLine = `${songName} ${artistName},"[${happyValue}]","[${sadValue}]","[${energyValue}]","[${calmnessValue}]","[${danceabilityValue}]"\n`
-        alert(newLine)
+        
         try {
             const response = await fetch('http://localhost:4000/write-file/Vibify_Database.csv', {
                 method: 'POST',
@@ -34,6 +34,8 @@ function AddSong() {
             
             const result = await response.json();
             console.log(result);
+            setSongName("")
+            setArtistName("")
         } catch (err) {
            console.log(err.message);
         }
