@@ -41,7 +41,6 @@ const App = ({ setSong, setMood, setToken, setSongList }) => {
   }, []); // Make sure to include dependencies if needed
 
   const average = (array) => {
-    console.log(array)
     if (array === undefined){
       return 0;
     }
